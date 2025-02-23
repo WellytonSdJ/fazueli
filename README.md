@@ -6,3 +6,10 @@ Projeto feito em expo, feito para executar audios registrados. Terá apenas dois
 
 - ao pressionar um botão ele deve fazer algum audio.
 - botão secundário para trocar de áudio.
+
+
+![app-image](./assets/images/app-image.png)
+
+#### Correções a realizar:
+
+- ao executar no android, ele não identifica a lib expo-audio.
