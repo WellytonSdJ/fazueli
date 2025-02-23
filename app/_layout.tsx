@@ -30,7 +30,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <App/>
+      <Stack>
+        <App />
+      </Stack>
     </ThemeProvider>
   );
 }
