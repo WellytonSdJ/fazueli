@@ -25,35 +25,51 @@ export default function App() {
   const [currentAudio, setCurrentAudio] = useState<string>(audioSources.bordao);
 
   const nextAudio = () => {
-  // Get the keys of the audioSources object as an array
-  const audioKeys = Object.keys(audioSources) as Array<keyof Audio>;
-  // Find the index of the current audio in the keys array
-  const currentIndex = audioKeys.findIndex((key) => audioSources[key] === currentAudio);
-  // Calculate the index of the next audio, wrapping around to the first if at the end
-  const nextIndex = (currentIndex + 1) % audioKeys.length;
-  console.log({nextIndex});
+    // Get the keys of the audioSources object as an array
+    const audioKeys = Object.keys(audioSources) as Array<keyof Audio>;
+    // Find the index of the current audio in the keys array
+    const currentIndex = audioKeys.findIndex((key) => audioSources[key] === currentAudio);
+    // Calculate the index of the next audio, wrapping around to the first if at the end
+    const nextIndex = (currentIndex + 1) % audioKeys.length;
+    console.log({ nextIndex });
 
-  player.pause();
+    player.pause();
 
-  player.replace(audioSources[audioKeys[nextIndex]])
-  // Set the currentAudio to the next audio
-  console.log(audioSources[audioKeys[nextIndex]]);
-  setCurrentAudio(audioSources[audioKeys[nextIndex]]);
+    player.replace(audioSources[audioKeys[nextIndex]])
+    // Set the currentAudio to the next audio
+    console.log(audioSources[audioKeys[nextIndex]]);
+    setCurrentAudio(audioSources[audioKeys[nextIndex]]);
 
   }
 
   const player = useAudioPlayer(currentAudio);
-  
+
   return (
-    <View style={styles.container}>      
-      <View style={{ alignItems: 'center' }}>
-        <Image source={require('@/assets/images/letra-l.png')} style={{ width: 300, height: 300 }} />
+    <View style={styles.container}>
+      <Text style={{ fontFamily: 'sans-serif', fontSize: 36, textAlign: 'center', color: '#fafafa' }}>Clique e faça!</Text>
+      <View
+        onTouchStart={() => player.play()}
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'white',
+          borderColor: 'black',
+          borderWidth: 4,
+          borderRadius: 150,
+          width: 300,
+          height: 300,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 25,
+        }}>
+        <Image source={require('@/assets/images/letra-l.png')} style={{ width: 250, height: 250 }} />
       </View>
-
-      <Button title="Apenas Faça" onPress={() => player.play()}  />
-      <Button title="Apenas TROQUE" onPress={() => nextAudio()}  />
-
-      <Text style={{ fontSize: 24 }}>Apenas faça!</Text>
+      <Button title="Trocar audio" onPress={() => nextAudio()} />
     </View>
   );
 }
@@ -62,8 +78,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#f31d01f5',
     padding: 10,
     gap: 8
   },
 });
+
