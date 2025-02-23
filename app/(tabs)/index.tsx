@@ -25,21 +25,13 @@ export default function App() {
   const [currentAudio, setCurrentAudio] = useState<string>(audioSources.bordao);
 
   const nextAudio = () => {
-    // Get the keys of the audioSources object as an array
     const audioKeys = Object.keys(audioSources) as Array<keyof Audio>;
-    // Find the index of the current audio in the keys array
     const currentIndex = audioKeys.findIndex((key) => audioSources[key] === currentAudio);
-    // Calculate the index of the next audio, wrapping around to the first if at the end
     const nextIndex = (currentIndex + 1) % audioKeys.length;
-    console.log({ nextIndex });
 
     player.pause();
-
     player.replace(audioSources[audioKeys[nextIndex]])
-    // Set the currentAudio to the next audio
-    console.log(audioSources[audioKeys[nextIndex]]);
     setCurrentAudio(audioSources[audioKeys[nextIndex]]);
-
   }
 
   const player = useAudioPlayer(currentAudio);
@@ -58,14 +50,7 @@ export default function App() {
           borderRadius: 150,
           width: 300,
           height: 300,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 25,
+          boxShadow: '0 2px 3.84px rgba(0,0,0,0.25)',
         }}>
         <Image source={require('@/assets/images/letra-l.png')} style={{ width: 250, height: 250 }} />
       </View>
